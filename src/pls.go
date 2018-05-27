@@ -2,20 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os/exec"
 	"strings"
+	"os"
 )
 
 func main() {
-	cmd := exec.Command("cmd", "/C", "echo", "%PATH%")
-	raw, err := cmd.Output()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	paths := strings.Split(string(raw), ";")
-	for _, v := range paths {
+	for _, v := range strings.Split(os.Getenv("PATH"), ";") {
 		fmt.Println(v)
 	}
 }
